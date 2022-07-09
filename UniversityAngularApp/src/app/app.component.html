@@ -1,2 +1,28 @@
-<strong>University Angular App</strong>
-<router-outlet></router-outlet>
+<div class="container">
+    <div class="page-header">
+        <div class="container">
+            <strong>University Angular App</strong>
+        </div>
+    </div>
+    <app-nav-bar *ngIf="isAuth"></app-nav-bar>
+    <router-outlet></router-outlet>
+
+    <form [formGroup]="loginForm" *ngIf="!isAuth" (ngSubmit)="onLoginClicked()">
+        <div class="container">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="Email">
+                <mat-error *ngIf="email?.invalid">Email is required.</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="Password">
+                <mat-error *ngIf="password?.invalid">Password needs at least 4 characters.</mat-error>
+            </mat-form-field>
+
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="loginForm?.invalid">Login</button>
+        </div>
+    </form>
+</div>

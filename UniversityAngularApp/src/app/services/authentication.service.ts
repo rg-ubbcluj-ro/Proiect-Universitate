@@ -1,9 +1,9 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {RouteConfigLoadEnd, Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {API_URL} from '../constants';
-import {UserItem} from '../models/user-items';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { RouteConfigLoadEnd, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { API_URL } from '../constants';
+import { UserItem } from '../models/user-items';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class AuthenticationService {
     return localStorage.getItem('token') !== null;
   }
 
-  register(email: string, password: string, firstName: string, lastName: string, role: string): 
+  register(email: string, password: string, firstName: string, lastName: string, role: string):
     Observable<UserItem> {
     const userInfo: UserItem = {
       email: email,
@@ -25,7 +25,7 @@ export class AuthenticationService {
       createdAt: new Date(),
       role: role,
     };
-      // isConfirmed: isConfirmed,
+    // isConfirmed: isConfirmed,
     return this.httpClient.post<UserItem>(
       `${API_URL}token/register`, userInfo);
   }
@@ -37,6 +37,7 @@ export class AuthenticationService {
   }
 
   logout(): void {
+    localStorage.removeItem('role');
     localStorage.removeItem('token');
   }
 

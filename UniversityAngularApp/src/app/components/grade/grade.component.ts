@@ -9,19 +9,18 @@ import { GradeService } from 'src/app/services/grade.service';
 })
 export class GradeComponent implements OnInit {
   gradesItems: GradeItem[] = [];
-  idStudent = 2;
   gradeItems: GradeItem[] = [];
-  newGradeItem : GradeItem ={
+  newGradeItem: GradeItem = {
     id: 0
   };
   //newCourseItem : CourseItem = {};
-  updateGradeItem : GradeItem = {
+  updateGradeItem: GradeItem = {
     id: 0
   };
- 
 
 
-  constructor(private gradeService : GradeService) { }
+
+  constructor(private gradeService: GradeService) { }
 
   /*ngOnInit(): void {
     this.gradeService.getGradesByStudent(this.idStudent)
@@ -31,28 +30,32 @@ export class GradeComponent implements OnInit {
   }*/
 
   ngOnInit(): void {
-    this.gradeService.getGrades()
-    .subscribe((gradeItems: GradeItem[]) => {
-      this.gradesItems=gradeItems;
-    });
+    // this.gradeService.getGrades()
+    //   .subscribe((gradeItems: GradeItem[]) => {
+    //     this.gradesItems = gradeItems;
+    //   });
+    this.gradeService.getGradesByStudent()
+      .subscribe((gradeItems: GradeItem[]) => {
+        this.gradesItems = gradeItems;
+      });
   }
   addGradeItem() {
     this.gradeService.addGradeItem(this.newGradeItem)
-    .subscribe((courseItems) =>
-    this.gradesItems.push(courseItems));
+      .subscribe((courseItems) =>
+        this.gradesItems.push(courseItems));
     this.newGradeItem = { id: 0 };
   }
-  
-  deleteGradeItem(id: number) { 
+
+  deleteGradeItem(id: number) {
     this.gradeService.deleteGradeItem(id).subscribe((id) => { this.ngOnInit(); });
   }
   updateGradeItems() {
     if (this.updateGradeItem.id) {
-      this.gradeService.updateGradeItem(this.updateGradeItem).subscribe((gradeItem) => 
-       this.gradeItems.push(gradeItem));
-      }
-      window.location.reload();
-    this.updateGradeItem = { id: 0 };
+      this.gradeService.updateGradeItem(this.updateGradeItem).subscribe((gradeItem) =>
+        this.gradeItems.push(gradeItem));
     }
+    window.location.reload();
+    this.updateGradeItem = { id: 0 };
+  }
 
 }

@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-sm bg-dark">
+    <ul class="nav navbar-nav">
+        <!--<p><b>Meniu</b></p>-->
+        <li class="nav-item">
+            <a class="nav-link" href="#">Acasa</a>
+        </li>
+        <li class="nav-item" *ngIf="userRole !== 'student'">
+            <a class="nav-link" [routerLink]="['/Student']" routerLinkActive="active">Studenti</a>
+        </li>
+        <li class="nav-item" *ngIf="userRole !== 'student' && userRole !== 'teacher'">
+            <a class="nav-link" [routerLink]="['/Teacher']" routerLinkActive="active">Profesori</a>
+        </li>
+        <li class="nav-item" *ngIf="userRole !== 'student' && userRole !== 'admin'">
+            <a class="nav-link" [routerLink]="['/Course']" routerLinkActive="active">Curs</a>
+        </li>
+        <li class="nav-item" *ngIf="userRole !== 'admin' && userRole !== 'student'">
+            <a class="nav-link" [routerLink]="['/Session']" routerLinkActive="active">Sesiune</a>
+        </li>
+        <li class="nav-item" *ngIf="userRole !== 'admin'">
+            <a class="nav-link" [routerLink]="['/Grade']" routerLinkActive="active">Note</a>
+        </li>
+        <li class="nav-item logout-button">
+            <mat-button-toggle (click)="onLogoutClicked()">Logout</mat-button-toggle>
+        </li>
+    </ul>
+</nav>

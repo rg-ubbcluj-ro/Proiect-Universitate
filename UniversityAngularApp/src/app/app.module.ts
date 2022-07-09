@@ -22,6 +22,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { TokenInterceptor } from './interceptor/token-interceptor.service';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { TokenInterceptor } from './interceptor/token-interceptor.service';
     SessionComponent,
     GradeComponent,
     LoginComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,

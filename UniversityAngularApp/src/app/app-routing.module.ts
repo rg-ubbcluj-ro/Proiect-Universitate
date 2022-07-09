@@ -1,41 +1,41 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {UserComponent} from './components/user/user.component';
-import {StudentComponent} from './components/student/student.component';
-import{TeacherComponent} from './components/teacher/teacher.component';
-import{CourseComponent} from './components/course/course.component';
-import {SessionComponent} from './components/session/session.component';
+import { UserComponent } from './components/user/user.component';
+import { StudentComponent } from './components/student/student.component';
+import { TeacherComponent } from './components/teacher/teacher.component';
+import { CourseComponent } from './components/course/course.component';
+import { SessionComponent } from './components/session/session.component';
 import { GradeComponent } from './components/grade/grade.component';
 import { LoginComponent } from './components/login/login.component';
 const routes: Routes = [
   {
-    path: 'User', 
+    path: 'User',
     component: UserComponent,
   },
   {
-    path: 'Student', 
+    path: 'Student',
     component: StudentComponent,
   },
   {
-    path: 'Teacher', 
+    path: 'Teacher',
     component: TeacherComponent,
   },
   {
-    path: 'Course', 
+    path: 'Course',
     component: CourseComponent,
   },
   {
-    path: 'Session', 
+    path: 'Session',
     component: SessionComponent,
   },
-{
-  path: 'Grade',
-  component: GradeComponent,
-},
-{
-  path: 'Auth/login',
-  component: LoginComponent,
-}
+  {
+    path: 'Grade',
+    component: GradeComponent,
+  },
+  {
+    path: 'Auth/login',
+    component: LoginComponent,
+  }
 ];
 
 @NgModule({

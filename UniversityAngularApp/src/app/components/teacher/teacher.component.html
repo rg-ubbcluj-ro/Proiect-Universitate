@@ -1,60 +1,55 @@
-<p>teacher works!</p>
-<!--
-public int Id { get; set; }
-        public string? Email { get; set;}
-        public string? DidacticRole {get; set;}
+<div class="container">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>DidacticRole</th>
+        </tr>
+        <tr *ngFor="let teacherItem of teacherItems">
+            <td>{{teacherItem.id}}</td>
+            <td>{{teacherItem.email}}</td>
+            <td>{{teacherItem.didacticRole}}</td>
+        </tr>
+    </table>
 
--->
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Email</th>
-        <th>DidacticRole</th>
-    </tr>
-    <tr *ngFor="let teacherItem of teacherItems">
-        <td>{{teacherItem.id}}</td>
-        <td>{{teacherItem.email}}</td>
-        <td>{{teacherItem.didacticRole}}</td>
-    </tr>
-</table>
+    <p>Add new teacher</p>
 
-<p>Add new teacher</p>
-
-<table>
-    <tr>
-        <td>Email</td>
-        <td><input [(ngModel)]="newTeacherItem.email"></td>
-    </tr>
-    <tr>
-        <td>DidacticRole</td>
-        <td><input [(ngModel)]="newTeacherItem.didacticRole"></td>
-    </tr>
-</table>
-<button (click)="addTeacherItem()"> Add</button>
+    <table>
+        <tr>
+            <td>Email</td>
+            <td><input [(ngModel)]="newTeacherItem.email"></td>
+        </tr>
+        <tr>
+            <td>DidacticRole</td>
+            <td><input [(ngModel)]="newTeacherItem.didacticRole"></td>
+        </tr>
+    </table>
+    <button (click)="addTeacherItem()"> Add</button>
 
 
-<p>Delete teacher</p>
+    <p>Delete teacher</p>
 
-<p>Dati id-ul</p>
-<input [(ngModel)]="idTeacher">
-<button (click)="deleteTeacherItem(idTeacher)"> Delete</button>
+    <p>Dati id-ul</p>
+    <input [(ngModel)]="idTeacher">
+    <button (click)="deleteTeacherItem(idTeacher)"> Delete</button>
 
 
-<p>Update teacher</p> 
-  <table>
-    <tr>
-        <td>Id</td>
-        <td><input [(ngModel)]="updateTeacherItem.id"></td>
-    </tr>
+    <p>Update teacher</p>
+    <table>
+        <tr>
+            <td>Id</td>
+            <td><input [(ngModel)]="updateTeacherItem.id"></td>
+        </tr>
 
-    <tr>
-        <td>Email</td>
-        <td><input [(ngModel)]="updateTeacherItem.email"></td>
-    </tr>
-    <tr>
-        <td>DidacticRole</td>
-        <td><input [(ngModel)]="updateTeacherItem.didacticRole"></td>
-    </tr>
-   
-</table> 
-<button (click)="updateTeacherItems()"> Update</button>
+        <tr>
+            <td>Email</td>
+            <td><input [(ngModel)]="updateTeacherItem.email"></td>
+        </tr>
+        <tr>
+            <td>DidacticRole</td>
+            <td><input [(ngModel)]="updateTeacherItem.didacticRole"></td>
+        </tr>
+
+    </table>
+    <button (click)="updateTeacherItems()"> Update</button>
+</div>
