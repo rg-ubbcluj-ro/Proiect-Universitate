@@ -1,0 +1,70 @@
+<p>student works!</p>
+<!--
+public int Id { get; set; }
+        public string? Email { get; set;}
+        public int YearOfStudy {get; set;}
+        public string? Specialization {get; set;}  
+
+-->
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>YearOfStudy</th>
+        <th>Specialization</th>
+    </tr>
+    <tr *ngFor="let studentItem of studentItems">
+        <td>{{studentItem.id}}</td>
+        <td>{{studentItem.email}}</td>
+        <td>{{studentItem.yearOfStudy}}</td>
+        <td>{{studentItem.specialization}}</td>
+    </tr>
+</table>
+
+<p>Add new student</p>
+
+<table>
+    <tr>
+        <td>Email</td>
+        <td><input [(ngModel)]="newStudentItem.email"></td>
+    </tr>
+    <tr>
+        <td>YearOfStudy</td>
+        <td><input [(ngModel)]="newStudentItem.yearOfStudy"></td>
+    </tr>
+    <tr>
+        <td>Specialization</td>
+        <td><input [(ngModel)]="newStudentItem.specialization"></td>
+    </tr>
+</table>
+<button (click)="addStudentItem()"> Add</button>
+
+
+<p>Delete student</p>
+
+<p>Dati id-ul</p>
+<input [(ngModel)]="idStudent">
+<button (click)="deleteStudentItem(idStudent)"> Delete</button>
+
+
+<p>Update student</p> 
+  <table>
+    <tr>
+        <td>Id</td>
+        <td><input [(ngModel)]="updateStudentItem.id"></td>
+    </tr>
+
+    <tr>
+        <td>Email</td>
+        <td><input [(ngModel)]="updateStudentItem.email"></td>
+    </tr>
+    <tr>
+        <td>YearOfStudy</td>
+        <td><input [(ngModel)]="updateStudentItem.yearOfStudy"></td>
+    </tr>
+    <tr>
+        <td>Specialization</td>
+        <td><input [(ngModel)]="updateStudentItem.specialization"></td>
+    </tr>
+</table> 
+<button (click)="updateStudentItems()"> Update</button>

@@ -1,0 +1,151 @@
+<p>user works!</p>
+<p>aaaa</p>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Role</th>
+    </tr>
+    <tr *ngFor="let userItem of userItems">
+        <td>{{userItem.id}}</td>
+        <td>{{userItem.firstName}}</td>
+        <td>{{userItem.lastName}}</td>
+        <td>{{userItem.email}}</td>
+        <td>{{userItem.password}}</td>
+        <td>{{userItem.role}}</td>
+    </tr>
+</table>
+
+<p>Add new activity</p>
+<!--<form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Ex. plimbare" name="name" [(ngModel)]="newActivityItem.name" >
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Descriere</mat-label>
+      <textarea matInput placeholder="Ex. seara..." name= "descriere" [(ngModel)]="newActivityItem.descriere"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Data</mat-label>
+      <textarea matInput placeholder="Ex. 2022-05-30T12:12:12" name="data" [(ngModel)]="newActivityItem.data"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Numar Ore</mat-label>
+        <textarea matInput placeholder="Ex. 2" name="numarOre" [(ngModel)]="newActivityItem.numarOre"></textarea>
+      </mat-form-field>
+  </form>
+-->
+ 
+  <!--<table>
+    <tr>
+        <th>Nume</th>
+        <th>Descriere</th>
+        <th>Data</th>
+        <th>NumarOre</th>
+    </tr>
+    <tr>
+        <td><input [(ngModel)]="newActivityItem.name"></td>
+        <td><input [(ngModel)]="newActivityItem.descriere"><td>
+        <td><input [(ngModel)]="newActivityItem.data"></td>
+        <td><input [(ngModel)]="newActivityItem.numarOre"></td>
+    </tr>
+</table> -->
+<table>
+    <tr>
+        <td>First Name</td>
+        <td><input [(ngModel)]="newUserItem.firstName"></td>
+    </tr>
+    <tr>
+        <td>Last Name</td>
+        <td><input [(ngModel)]="newUserItem.lastName"></td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td><input [(ngModel)]="newUserItem.email"></td>
+    </tr>
+    <tr>
+        <td>Parola</td>
+        <td><input [(ngModel)]="newUserItem.password"></td>
+    </tr>
+    <tr>
+        <td>Rol</td>
+        <td><input [(ngModel)]="newUserItem.role"></td>
+    </tr>
+</table>
+<button (click)="addUserItem()"> Add</button>
+
+
+<p>Delete user</p>
+
+<p>Dati id-ul</p>
+<input [(ngModel)]="idUser">
+<button (click)="deleteUserItem(idUser)"> Delete</button>
+
+
+<p>Update activity</p> 
+  <table>
+    <tr>
+        <td>Id</td>
+        <td><input [(ngModel)]="updateUserItem.id"></td>
+    </tr>
+    <tr>
+        <td>Nume</td>
+        <td><input [(ngModel)]="updateUserItem.firstName"></td>
+    </tr>
+    <tr>
+        <td>last name</td>
+        <td><input [(ngModel)]="updateUserItem.lastName"></td>
+    </tr>
+    <tr>
+        <td>email</td>
+        <td><input [(ngModel)]="updateUserItem.email"></td>
+    </tr>
+    <tr>
+        <td>parola</td>
+        <td><input [(ngModel)]="updateUserItem.password"></td>
+    </tr>
+    <tr>
+        <td>Rol</td>
+        <td><input [(ngModel)]="updateUserItem.role"></td>
+    </tr>
+</table> 
+<button (click)="updateUserItems()"> Update</button>
+<!-- <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Id</mat-label>
+        <input matInput placeholder="Ex. 1" name="id" [(ngModel)]="updateActivityItem.id" >
+      </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Ex. plimbare" name="name" [(ngModel)]="updateActivityItem.name" >
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Descriere</mat-label>
+      <textarea matInput placeholder="Ex. seara..." name= "descriere" [(ngModel)]="updateActivityItem.descriere"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Data</mat-label>
+      <textarea matInput placeholder="Ex. 2022-05-30T12:12:12" name="data" [(ngModel)]="updateActivityItem.data"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Numar Ore</mat-label>
+        <textarea matInput placeholder="Ex. 2" name="numarOre" [(ngModel)]="updateActivityItem.numarOre"></textarea>
+      </mat-form-field>
+  </form>
+<button (click)="updateActivitiesItem()"> Update</button>
+
+<p>Number of hours is:  <input [(ngModel)]="numberHour"></p>
+<button (click)="getByNumberHour()">Get by number hour</button>
+<p>Data is:  <input [(ngModel)]="dataFilter"></p>
+<button (click)="getByData()">Get by Data</button>
+<button (click)="getByDateAndHour()">Get By Date and Hour</button>-->

@@ -1,0 +1,59 @@
+<p>course works!</p>
+<!--
+     public int  Id { get; set; }
+        public int IdTeacher { get; set; }
+        public string? CourseName { get; set; }
+-->
+    <table>
+    <tr>
+        <th>Id</th>
+        <th>IdTeacher</th>
+        <th>CourseName</th>
+    </tr>
+    <tr *ngFor="let courseItem of courseItems">
+        <td>{{courseItem.id}}</td>
+        <td>{{courseItem.idTeacher}}</td>
+        <td>{{courseItem.courseName}}</td>
+    </tr>
+</table>
+
+<p>Add new course</p>
+
+<table>
+    <tr>
+        <td>IdTeacher</td>
+        <td><input [(ngModel)]="newCourseItem.idTeacher"></td>
+    </tr>
+    <tr>
+        <td>CourseName</td>
+        <td><input [(ngModel)]="newCourseItem.courseName"></td>
+    </tr>
+</table>
+<button (click)="addCourseItem()"> Add</button>
+
+
+<p>Delete course</p>
+
+<p>Dati id-ul</p>
+<input [(ngModel)]="idCourse">
+<button (click)="deleteCourseItem(idCourse)"> Delete</button>
+
+
+<p>Update course</p> 
+  <table>
+    <tr>
+        <td>Id</td>
+        <td><input [(ngModel)]="updateCourseItem.id"></td>
+    </tr>
+
+    <tr>
+        <td>IdTeacher</td>
+        <td><input [(ngModel)]="updateCourseItem.idTeacher"></td>
+    </tr>
+    <tr>
+        <td>CourseName</td>
+        <td><input [(ngModel)]="updateCourseItem.courseName"></td>
+    </tr>
+   
+</table> 
+<button (click)="updateCourseItems()"> Update</button>

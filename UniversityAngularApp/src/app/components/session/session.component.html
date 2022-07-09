@@ -1,0 +1,91 @@
+<!-- export interface SessionItem {
+    id?: number;
+    type?: boolean;
+    universityYear?: number;
+    semester?: string;
+    startDate?: Date;
+    endDate?: Date;
+} -->
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Type</th>
+        <th>University Year</th>
+        <th>Semester</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+    </tr>
+    <tr *ngFor="let sessionItem of sessionItems">
+        <td>{{sessionItem.id}}</td>
+        <td>{{sessionItem.type}}</td>
+        <td>{{sessionItem.universityYear}}</td>
+        <td>{{sessionItem.semester}}</td>
+        <td>{{sessionItem.startDate}}</td>
+        <td>{{sessionItem.endDate}}</td>
+    </tr>
+</table>
+
+<p>Add new Session</p>
+
+<table>
+    <tr>
+        <td>Type</td>
+        <td><input [(ngModel)]="newSessionItem.type"></td>
+    </tr>
+    <tr>
+        <td>University Year</td>
+        <td><input [(ngModel)]="newSessionItem.universityYear"></td>
+    </tr>
+    <tr>
+        <td>Semester</td>
+        <td><input [(ngModel)]="newSessionItem.semester"></td>
+    </tr>
+    <tr>
+        <td>Start Date</td>
+        <td><input [(ngModel)]="newSessionItem.startDate"></td>
+    </tr>
+    <tr>
+        <td>End Date</td>
+        <td><input [(ngModel)]="newSessionItem.endDate"></td>
+    </tr>
+</table>
+
+<button (click)="addSessionItem()"> Add</button>
+
+
+<p>Delete Session</p>
+
+<p>Dati id-ul</p>
+<input [(ngModel)]="idSession">
+<button (click)="deleteSessionItem(idSession)"> Delete</button>
+
+
+<p>Update session</p> 
+<table>
+    <tr>
+        <td>Id</td>
+        <td><input [(ngModel)]="updateSessionItem.id"></td>
+    </tr>
+    <tr>
+        <td>Type</td>
+        <td><input [(ngModel)]="updateSessionItem.type"></td>
+    </tr>
+    <tr>
+        <td>University Year</td>
+        <td><input [(ngModel)]="updateSessionItem.universityYear"></td>
+    </tr>
+    <tr>
+        <td>Semester</td>
+        <td><input [(ngModel)]="updateSessionItem.semester"></td>
+    </tr>
+    <tr>
+        <td>Start Date</td>
+        <td><input [(ngModel)]="updateSessionItem.startDate"></td>
+    </tr>
+    <tr>
+        <td>End Date</td>
+        <td><input [(ngModel)]="updateSessionItem.endDate"></td>
+    </tr>
+   
+</table> 
+<button (click)="updateSessionItems()"> Update</button>

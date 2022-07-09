@@ -1,0 +1,26 @@
+<table>
+    <tr>
+        <th>Id</th>
+        <th>IdCours</th>
+        <th>IdProfesor</th>
+        <th>IdStudent</th>
+        <th>IdSesiune</th>
+        <th>Nota</th>
+        <th>DataExamen</th>
+    </tr>
+    <tr *ngFor="let gradeItem of gradesItems">
+        <td>{{gradeItem.id}}</td>
+        <td>{{gradeItem.idCourse}}</td>
+        <td>{{gradeItem.idTeacher}}</td>
+        <td>{{gradeItem.idStudent}}</td>
+        <td>{{gradeItem.idSession}}</td>
+        <td>{{gradeItem.gradeValue}}</td>
+        <td>{{gradeItem.examDate}}</td>
+    </tr>
+</table>
+
+<!--page grade-->
+
+
+
+
