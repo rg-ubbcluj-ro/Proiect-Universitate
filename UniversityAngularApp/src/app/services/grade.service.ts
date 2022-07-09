@@ -12,8 +12,8 @@ export class GradeService {
   getGrades() {
       return this.httpClient.get<GradeItem[]>(API_URL + 'grade');
   }
-  getGradesByStudent(idStudent?: number){
-    return this.httpClient.get<GradeItem[]>(API_URL + 'grade?idStudent=' + idStudent); 
+  getGradesByStudent(){
+    return this.httpClient.get<GradeItem[]>(API_URL + 'grade/idStudent'); 
   }
 
   addGradeItem(gradeItem: GradeItem){

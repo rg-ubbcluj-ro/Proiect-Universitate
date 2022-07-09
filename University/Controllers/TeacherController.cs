@@ -33,16 +33,17 @@ namespace University.Controllers
             string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
 
             var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
+            if(currentLoggedInUser.Role=="admin" || currentLoggedInUser.Role=="adminSistem")
+            {
             var query = _context.TeachersItems.AsQueryable();
             //query = query.Where(c => c.userInfo.Id == currentLoggedInUser.Id);
 
             return await query.Include(UserInfo => UserInfo.UserInfo).Select(item => TeacherMappers.TeacherToDTO(item)).ToListAsync();
-
-        //   if (_context.TeachersItems == null)
-        //   {
-        //       return NotFound();
-        //   }
-        //     return await _context.TeachersItems.ToListAsync();
+            }
+            else
+            {
+                return Unauthorized("You are not authorized to view a teacher. You are not a admin or adminSistem");
+            }
         }
 
         // GET: api/Teacher/5
@@ -51,7 +52,8 @@ namespace University.Controllers
         {
             string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
             var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
-
+          if(currentLoggedInUser.Role=="admin" || currentLoggedInUser.Role=="adminSistem")
+            {
           var teacherItem = await _context.TeachersItems.FirstOrDefaultAsync(c => c.Id == id);  
 
           if (_context.TeachersItems == null)
@@ -59,14 +61,16 @@ namespace University.Controllers
               return NotFound();
           }
             var teacher = _context.TeachersItems.FirstOrDefault(c => c.Id == id);
-
-
             if (teacher == null)
             {
                 return NotFound();
             }
-
             return TeacherMappers.TeacherToDTO(teacher);
+            }
+            else
+            {
+                return Unauthorized("You are not authorized to view a teacher. You are not a admin or adminSistem");
+            }
         }
 
         // PUT: api/Teacher/5
@@ -82,7 +86,8 @@ namespace University.Controllers
             var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
             //teacher.userInfo = currentLoggedInUser;
 
-
+            if(currentLoggedInUser.Role=="admin" || currentLoggedInUser.Role=="adminSistem")
+            {
             _context.Entry(teacher).State = EntityState.Modified;
 
             try
@@ -100,8 +105,12 @@ namespace University.Controllers
                     throw;
                 }
             }
-
             return NoContent();
+            }
+            else
+            {
+                return Unauthorized("You are not authorized to edit a teacher. You are not a admin or adminSistem");
+            }
         }
 
         // POST: api/Teacher
@@ -116,7 +125,8 @@ namespace University.Controllers
         string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
 
         var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
- 
+        if(currentLoggedInUser.Role=="admin" || currentLoggedInUser.Role=="adminSistem")
+            {
        var teachertoAdd = TeacherMappers.DTOtoTeacher(teacherDTO); 
         //var teacherToAdd = TeacherMappers.TeacherToDTO(teacherDTO);
 
@@ -126,6 +136,11 @@ namespace University.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetTeacher), new { id = teacherDTO.Id }, TeacherMappers.TeacherToDTO(teachertoAdd));
+            }
+            else
+            {
+                return Unauthorized("You are not authorized to add a teacher. You are not a admin or adminSistem");
+            }
         }
 
         // DELETE: api/Teacher/5
@@ -140,7 +155,8 @@ namespace University.Controllers
             string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
 
             var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
-
+            if(currentLoggedInUser.Role=="admin" || currentLoggedInUser.Role=="adminSistem")
+            {
             var teacher = await _context.TeachersItems.FindAsync(id);
             if (teacher == null)
             {
@@ -151,6 +167,11 @@ namespace University.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+            }
+            else
+            {
+                return Unauthorized("You are not authorized to delete a teacher. You are not a admin or adminSistem");
+            }
         }
 
         private bool TeacherExists(int id)

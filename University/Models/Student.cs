@@ -7,7 +7,7 @@ namespace University.Models
         public string? Email { get; set;}
         public int YearOfStudy {get; set;}
         public string? Specialization {get; set;}  
-        
+        //public int idUserInfo {get; set;}        
         //Navigation Properties
         public UserInfo? UserInfo { get; set; }
     }

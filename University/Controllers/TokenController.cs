@@ -70,6 +70,7 @@ namespace Univerity.Controllers
 
                     return Ok(new
                     {
+                        Role = user.Role,
                         Token = new JwtSecurityTokenHandler().WriteToken(token)
                     });
                 }

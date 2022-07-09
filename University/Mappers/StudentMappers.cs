@@ -10,6 +10,7 @@ public static class StudentMappers
             Email = student.Email,
             YearOfStudy = student.YearOfStudy,
             Specialization = student.Specialization,
+            UserInfo = student.UserInfo == null ? null : UserInfoMappers.UserInfoToDTO(student.UserInfo),
         };
 
     public static Student DTOtoStudent(StudentDTO studentDTO) =>
@@ -19,5 +20,6 @@ public static class StudentMappers
             Email = studentDTO.Email,
             YearOfStudy = studentDTO.YearOfStudy,
             Specialization = studentDTO.Specialization,
+            UserInfo = studentDTO.UserInfo == null ? null : UserInfoMappers.DTOtoUserInfo(studentDTO.UserInfo),
         };
 }

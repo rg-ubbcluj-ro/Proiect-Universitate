@@ -31,28 +31,29 @@ namespace University.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SessionDTO>>> GetSessionItems()
         {
-        //   if (_context.SessionItems == null)
-        //   {
-        //       return NotFound();
-        //   }
-        //     return await _context.SessionItems.ToListAsync();
-        
             string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
 
             var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
+            if(currentLoggedInUser.Role=="adminSistem")
+            { 
             var query = _context.SessionItems.AsQueryable();
             //query = query.Where(c => c.userInfo.Id == currentLoggedInUser.Id);
             return await query.Select(item => SessionMappers.SessionToDTO(item)).ToListAsync();
-
+            }
+            else 
+            {
+                return Unauthorized("You are not authorized to view a session. You are not a adminSistem");
+            }
         }
 
         // GET: api/Session/5
         [HttpGet("{id}")]
         public async Task<ActionResult<SessionDTO>> GetSession(int id)
         {
-            //string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
-            //var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
-
+            string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
+            var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
+          if(currentLoggedInUser.Role=="adminSistem")
+            {  
           var sessionItem = await _context.SessionItems.FirstOrDefaultAsync(c => c.Id == id);  
 
           if (_context.SessionItems == null)
@@ -67,6 +68,11 @@ namespace University.Controllers
             }
 
             return SessionMappers.SessionToDTO(session);
+            }
+            else
+            {
+                return Unauthorized("You are not authorized to view a session. You are not a adminSistem");
+            }
         }
 
         // PUT: api/Session/5
@@ -81,9 +87,8 @@ namespace University.Controllers
 
             string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
             var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
-           // session.userInfo = currentLoggedInUser;
-
-
+           if(currentLoggedInUser.Role=="adminSistem")
+            { 
             _context.Entry(session).State = EntityState.Modified;
 
             try
@@ -103,6 +108,11 @@ namespace University.Controllers
             }
 
             return NoContent();
+            }
+            else
+            {
+                return Unauthorized("You are not authorized to update a session. You are not a adminSistem");
+            }
         }
 
         // POST: api/Session
@@ -117,8 +127,8 @@ namespace University.Controllers
           string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
 
         var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
-
-
+        if(currentLoggedInUser.Role=="adminSistem")
+            {  
         var sessionToAdd = SessionMappers.DTOtoSession(sessionDTO);
 
         //sessionToAdd.userInfo = currentLoggedInUser;
@@ -128,6 +138,11 @@ namespace University.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetSession), new { id = sessionDTO.Id }, SessionMappers.SessionToDTO(sessionToAdd));
+            }
+            else
+            {
+                return Unauthorized("You are not authorized to add a session. You are not a adminSistem");
+            }
         }
 
         // DELETE: api/Session/5
@@ -141,7 +156,8 @@ namespace University.Controllers
             string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
 
             var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
-
+            if(currentLoggedInUser.Role=="admin" || currentLoggedInUser.Role=="adminSistem")
+            {   
             var session = await _context.SessionItems.FindAsync(id);
             if (session == null)
             {
@@ -152,6 +168,11 @@ namespace University.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+            }
+            else 
+            {
+                return Unauthorized("You are not authorized to delete a student. You are not a admin or adminSistem");
+            }
         }
 
         private bool SessionExists(int id)

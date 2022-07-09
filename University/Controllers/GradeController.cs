@@ -54,7 +54,39 @@ namespace University.Controllers
             .Include(course=>course.Course).Select(item => GradeMappers.GradeToDTO(item)).ToListAsync();
         }
         
+        // GET: api/Grade/5(idStudent)
+        [HttpGet("idStudent")]
+        public async Task<ActionResult<IEnumerable<GradeDTO>>> GetGradesItemsByIdStudent(int idStudent)
+        {
+            string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
 
+            var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
+            var query = _context.GradesItems.AsQueryable();
+            //query = query.Where(c => c.userInfo.Id == currentLoggedInUser.Id);
+          if(currentLoggedInUser.Role=="student")
+          {  
+          if (_context.GradesItems == null)
+          {
+              return NotFound();
+          }
+             //var query = _context.GradesItems.AsQueryable();
+
+        if (currentLoggedInUser.Id!=null)
+
+        {
+            query = query.Where(c => c.IdStudent == currentLoggedInUser.Id);
+        }
+          return await query.Include(student =>student.Student)
+            .Include(teacher=>teacher.Teacher)
+            .Include(session=>session.Session)
+            .Include(course=>course.Course).Select(item => GradeMappers.GradeToDTO(item)).ToListAsync();
+          }
+          else
+            {
+                return Unauthorized("You are not a student");
+            }
+        }
+         
         // GET: api/Grade/5
         [HttpGet("{id}")]
         public async Task<ActionResult<GradeDTO>> GetGrade(int id)

@@ -30,14 +30,18 @@ export class GradeComponent implements OnInit {
   }*/
 
   ngOnInit(): void {
-    // this.gradeService.getGrades()
-    //   .subscribe((gradeItems: GradeItem[]) => {
-    //     this.gradesItems = gradeItems;
-    //   });
-    this.gradeService.getGradesByStudent()
+    if(localStorage.getItem("role")==="teacher"||localStorage.getItem("role")==="adminSistem"){
+    this.gradeService.getGrades()
+       .subscribe((gradeItems: GradeItem[]) => {
+         this.gradesItems = gradeItems;
+       });
+      }
+    if(localStorage.getItem("role")==="student"){ 
+       this.gradeService.getGradesByStudent()
       .subscribe((gradeItems: GradeItem[]) => {
         this.gradesItems = gradeItems;
       });
+    }
   }
   addGradeItem() {
     this.gradeService.addGradeItem(this.newGradeItem)

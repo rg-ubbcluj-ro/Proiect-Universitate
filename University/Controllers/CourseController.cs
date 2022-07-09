@@ -32,17 +32,18 @@ namespace University.Controllers
             string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
 
             var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
+           if(currentLoggedInUser.Role=="adminSistem" || currentLoggedInUser.Role=="teacher")
+            {
             var query = _context.CoursesItems.AsQueryable();
             //query = query.Where(c => c.userInfo.Id == currentLoggedInUser.Id);
             return await query
             .Include(teacher=>teacher.Teacher).Select(item => CourseMappers.CourseToDTO(item)).ToListAsync();
-
-        //   if (_context.CoursesItems == null)
-        //   {
-        //       return NotFound();
-        //   }
-        //     return await _context.CoursesItems.Include(teacher =>teacher.Teacher).ToListAsync();
-        }
+            }
+            else
+            {
+                return Unauthorized("You are not authorized to view a course. You are not a adminSistem or teacher");
+            }
+         }
 
         // GET: api/Course/5
         [HttpGet("{id}")]
@@ -50,27 +51,23 @@ namespace University.Controllers
         {
             string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
             var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
-
+          if(currentLoggedInUser.Role=="adminSistem" || currentLoggedInUser.Role=="teacher")
+            {
           var courseItem = await _context.CoursesItems.FirstOrDefaultAsync(c => c.Id == id);  
 
           if (courseItem == null)
           {
               return NotFound();
           }
-          //var course = _context.CoursesItems.Include(Teacher =>Teacher.Teacher).FirstOrDefault(c => c.Id == id);
-            // var course = await _context.CoursesItems.FindAsync(id);
-
-            // if (course == null)
-            // {
-            //     return NotFound();
-            // }
-
-            //return course;
             var query = _context.CoursesItems.AsQueryable();
-           // return  CourseMappers.CourseToDTO(course);
+        
             return await query
             .Include(teacher => teacher.Teacher).Select(item => CourseMappers.CourseToDTO(item)).ToListAsync();
-
+            }
+            else
+            {
+                return Unauthorized("You are not authorized to view a course. You are not a adminSistem or teacher");
+            }
         }
 
         // PUT: api/Course/5
@@ -82,13 +79,12 @@ namespace University.Controllers
             {
                 return BadRequest();
             }
-
             string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
             var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
             //course.userInfo = currentLoggedInUser;
-
+            if(currentLoggedInUser.Role=="adminSistem" || currentLoggedInUser.Role=="teacher")
+            { 
             _context.Entry(course).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
@@ -104,8 +100,12 @@ namespace University.Controllers
                     throw;
                 }
             }
-
             return NoContent();
+            }
+            else
+            {
+                return Unauthorized("You are not authorized to update a course");
+            }
         }
 
         // POST: api/Course
@@ -117,7 +117,8 @@ namespace University.Controllers
 
         var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
 
-
+        if(currentLoggedInUser.Role=="adminSistem"|| currentLoggedInUser.Role=="teacher")
+            { 
         var courseToAdd = CourseMappers.DTOtoCourse(courseDTO);
 
         //courseToAdd.userInfo = currentLoggedInUser;
@@ -130,6 +131,11 @@ namespace University.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetCourse), new { id = courseDTO.Id }, CourseMappers.CourseToDTO(courseToAdd));
+            }
+            else
+            {
+                return Unauthorized("You are not authorized to add a course.");
+            }
         }
 
         // DELETE: api/Course/5
@@ -140,7 +146,8 @@ namespace University.Controllers
             string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Id").Value;
 
             var currentLoggedInUser = _context.UsersItems.FirstOrDefault(c => c.Id == long.Parse(userId));
-
+            if(currentLoggedInUser.Role=="adminSistem" || currentLoggedInUser.Role=="teacher")
+            { 
             if (_context.CoursesItems == null)
             {
                 return NotFound();
@@ -155,6 +162,11 @@ namespace University.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+            }
+            else
+            {
+                return Unauthorized("You are not authorized to delete a course.");
+            }
         }
 
         private bool CourseExists(int id)
